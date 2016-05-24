@@ -1,0 +1,9 @@
+---
+  - hosts: all
+    tasks:
+    - name: upgrade boto
+      shell: /usr/bin/python -m easy_install boto
+      become: yes
+    - name: install awscli
+      pip: name=awscli extra_args="--upgrade"
+      become: yes

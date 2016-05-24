@@ -1,0 +1,4 @@
+[master]
+# master hosts addresses
+[worker]
+# worker hosts addresses

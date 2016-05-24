@@ -1,0 +1,5 @@
+127.0.0.1 localhost.localdomain localhost
+10.0.0.229 cdh-01.localdomain cdh-01
+10.0.0.213 cdh-02.localdomain cdh-02
+10.0.0.68 cdh-03.localdomain cdh-03
+10.0.0.53 cdh-04.localdomain cdh-04

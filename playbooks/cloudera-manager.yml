@@ -1,0 +1,24 @@
+---
+  - hosts: master
+    tasks:
+    - name: Ensure CM Repo is Enabled
+      yum_repository:
+        name: cloudera-manager
+        description: Cloudera Manager
+        baseurl: https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5/
+        gpgkey: https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+        gpgcheck: yes
+    - name: install cloudera-manager-server-db-2
+      yum: pkg=cloudera-manager-server-db-2 state=installed
+      register: db_installed
+    - name: start cloudera-scm-server-db
+      service: name=cloudera-scm-server-db state=started
+      when: db_installed.changed
+    - name: install cloudera-manager-server
+      yum: pkg=cloudera-manager-server state=installed
+    - name: Creating missing directories for cloudera-manager-server
+      shell: mkdir -p /var/lib/cloudera-scm-server && chown cloudera-scm -R /var/lib/cloudera-scm-server
+      when: db_installed.changed
+    - name: start cloudera-manager-server
+      service: name=cloudera-scm-server state=started
+
